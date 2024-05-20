@@ -50,6 +50,7 @@ async function disconnectButton() {
 };
 
 async function readLoop() {
+    let numOfSample=parseInt(document.getElementById("numOfSamples_Input").value);
 
     try {
         let receivedData = '';
@@ -90,7 +91,9 @@ async function readLoop() {
                                 console.log("JSON data:", jsonData);
                                 document.getElementsByClassName("result_container")[0].innerHTML += `<p>${JSON.stringify(jsonData)}</p>`;
                                 //document.getElementById("result").textContent += JSON.stringify(jsonData);
-                                flag= false;
+                                //flag= false;
+                                handleProgress(jsonData.test_parm.num_of_sample +1, numOfSample+1);
+
                             }
                         } catch (error) {
                             console.error('Error parsing JSON:', error);
@@ -231,13 +234,16 @@ document.getElementById("startTestButton").addEventListener("click",async functi
 
 
     json["tg"] = parseInt(document.getElementById("Integration_Input").value);
-    let numOfSample=parseInt(document.getElementById("numOfSamples_Input").value);
-    json["num_of_sample"] = 1//parseInt(document.getElementById("numOfSamples_Input").value);
+    //let numOfSample=parseInt(document.getElementById("numOfSamples_Input").value);
+    json["num_of_sample"] = parseInt(document.getElementById("numOfSamples_Input").value);
 
     const jsonString = JSON.stringify(json);
     // Assuming you have a function sendJsonOverSerial(jsonString) to send the JSON over serial
     startProgressBar();
-    
+
+    await send(jsonString);
+
+   /* 
     for (let i = 0; i < numOfSample; i++) {
         handleProgress(i+1, numOfSample+1);
         console.log("i " ,i)
@@ -258,7 +264,7 @@ document.getElementById("startTestButton").addEventListener("click",async functi
 
     closeProgressBar();
 
-
+*/
 });
 
 
@@ -280,9 +286,9 @@ function closeProgressBar() {
 function handleProgress(data, total) {
     const progressBar = document.getElementById('progress');
     progressBar.value = (data / total) * 100;
-   /* if (data + 1 >= total) {
+    if (data + 1 >= total) {
         closeProgressBar();
-    }*/
+    }
 }
 
 
