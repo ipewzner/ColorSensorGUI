@@ -17,10 +17,6 @@
 
 <body>
 
-    <div id="progressBar" class="progress">
-        <p>Progress:</p>
-        <progress id="progress" class="progress-bar" value="0" max="100"></progress>
-    </div>
 
     <div class="system">
         <h1>Control System</h1>
@@ -74,8 +70,15 @@
                                     min="0" max="100" value="10">
                             </div>
                         </div>
+
                         <div class="space"></div>
+
                         <button id="startTestButton" class="startTestButton" disabled>Start Test</button>
+                        
+                        <div id="progressBar" class="progress">
+                            <p>Progress</p>
+                            <progress id="progress" class="progress-bar" value="0" max="100"></progress>
+                        </div>
 
                     </div>
                 </form>
@@ -116,16 +119,16 @@
     <div class="result_text_container">
         <p>Result:</p>-->
 
-        <div>
+                    <div>
 
-            <button id="clearText" class="" onclick="clearText()">Clear Test</button>
-            <button id="copyText" class="copyText" onclick="copyText()">Copy text</button>
-                </div>
+                        <button id="clearText" class="" onclick="clearText()">Clear Test</button>
+                        <button id="copyText" class="copyText" onclick="copyText()">Copy text</button>
+                    </div>
                 </div>
 
                 <div class="result_container">
                 </div>
-                    <!--<p id="result"></p>
+                <!--<p id="result"></p>
                     
 
                          <span class="material-symbols-outlined" onclick="copyText()" onmouseover="handle_mouseover()"
@@ -146,5 +149,3 @@
 </body>
 
 </html>
-
-

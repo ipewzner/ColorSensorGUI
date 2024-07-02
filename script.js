@@ -50,7 +50,6 @@ async function disconnectButton() {
 };
 
 async function readLoop() {
-    let numOfSample=parseInt(document.getElementById("numOfSamples_Input").value);
 
     try {
         let receivedData = '';
@@ -86,7 +85,8 @@ async function readLoop() {
                                 handleProgress(progress, totel);
                                 */
                             } else {
-                                
+                                let numOfSample=parseInt(document.getElementById("numOfSamples_Input").value);
+
                                 const jsonData = JSON.parse(line);
                                 console.log("JSON data:", jsonData);
                                 document.getElementsByClassName("result_container")[0].innerHTML += `<p>${JSON.stringify(jsonData)}</p>`;
@@ -272,21 +272,29 @@ document.getElementById("startTestButton").addEventListener("click",async functi
 
 
 function startProgressBar() {
+    
     const progressBar = document.getElementById('progressBar');
-    progressBar.style.display = 'flex';
-    progress = 0;
+    const progress = document.getElementById('progress');
+    progress.value = 0;
+   progressBar.style.display = 'flex';
    // updateProgressBar();
 }
 
 function closeProgressBar() {
     const progressBar = document.getElementById('progressBar');
     progressBar.style.display = 'none';
+
+
 }
 
 function handleProgress(data, total) {
     const progressBar = document.getElementById('progress');
     progressBar.value = (data / total) * 100;
+
+   // progressText.textContent = "Progress";
+
     if (data + 1 >= total) {
+        progressBar.value=0
         closeProgressBar();
     }
 }
